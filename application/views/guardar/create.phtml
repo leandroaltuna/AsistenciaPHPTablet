@@ -1,0 +1,18 @@
+<label class="alert-success"><?php echo $this->titulo; ?></label>
+
+<?php echo $this->form->open_tag(); 
+//echo form_hidden($this->form->codigo->name);
+?>
+<b>AULA:</b><?php echo form_input($this->form->aula); ?>
+<b>ESTATUS:</b><?php echo form_input($this->form->estatus); ?>
+<b>SEDE:</b><?php echo form_input($this->form->sede); ?>
+<b>LOCAL:</b><?php echo form_input($this->form->local_aplicacion); ?>
+<b>Ape. Paterno:</b><?php echo form_input($this->form->apepat); ?>
+<b>Ape. Materno:</b><?php echo form_input($this->form->apemat); ?>
+<b>Nombres:</b><?php echo form_input($this->form->nombres); ?>
+<b>DNI:</b><?php echo form_input($this->form->ins_numdoc); ?>
+<b>Nro_local:</b><?php
+echo form_input($this->form->nro_local) . '<br>';
+$data = array('value' => 'GUARDAR DATA', 'class' => 'btn btn-success');
+echo form_submit($data);
+echo $this->form->close_tag();

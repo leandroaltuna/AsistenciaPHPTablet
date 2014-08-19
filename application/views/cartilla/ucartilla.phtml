@@ -1,0 +1,246 @@
+
+<div class="container">
+    <div class="panel panel-ecustom ui-shadow">
+        <div class="panel-heading etitleprin"><?php echo 'SEDE: '.($this->_request->session('sede')).' / LOCAL: '.$this->_request->session('nlocal'); ?></div>
+            <div class="panel-body etitle">
+                
+                <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/cartilla" method="GET" id="frmauladirector" name="frmfichadirector">
+                    <div class="row"> 
+                        <div class="form-group  espacerightleft">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Aula</b></div>
+                            <select class="form-control" id="paulas_id" required name="paulas">
+                                <option value="">Seleccione</option>
+                                  <?php foreach ($this->aulas as $aula): ?>
+                                <option value="<?php echo $aula->naula; ?>"
+                                    <?php if(isset($_REQUEST['paulas'])): 
+                                            if($_REQUEST['paulas'] == $aula->naula) : 
+                                                echo 'selected' ; 
+                                            endif; 
+                                          endif;?> > Aula <?php echo $aula->naula;  if($aula->tipo==0):echo ' (Contingencia)'; endif ; ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-xs-12 espace-top espace-bottom buscador">
+                   
+                    <div class="input-group">
+                        <input id="ins_numdoc" required class="form-control text-left input-buscador" maxlength="10" placeholder="Pasar Lector de Código de Barra" data-length="" value="" name="ins_numdoc">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary  input-buscador " type="submit">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+   <div class="row esubcontentpanel " >
+       
+       <?php  if($this->estado == '1'): ?>
+        <div class="row esubcontentpanel alert-success" >
+              <div class="row">
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       <?php  if($this->estado == '6'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error : La Cuadernillo no pertenece al local.
+              <div class="row">
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+         <div class="row">
+                
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Local</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+                    </div>
+                </div>
+               
+
+         </div>    
+        </div>
+       <?php endif; ?>
+       
+         <?php  if($this->estado == '7'): ?>
+        <div class="row esubcontentpanel alert-success" >
+           Grabo Cuadernillo de Contingencia.
+              <div class="row">
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Cod Cuadernillo</b></div>
+                        <label id="dni_id"><?php echo $_REQUEST['ins_numdoc']; ?></label>
+                    </div>
+                </div>
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       <?php  if($this->estado == '4'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error : Código Ficha no encontrada en el Padron.
+              <div class="row">
+                 
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>COD CUADERNILLO</b></div>
+                        <label id="dni_id"><?php echo $_REQUEST['ins_numdoc'];?></label>
+                    </div>
+                </div>
+                
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       
+       <?php  if($this->estado == '3'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error : Cuadernillo ya registrado.
+                 <div class="row">
+            <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       
+       
+        <?php  if($this->estado == '2'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error : Cuadernillo no pertenece al aula.
+                 <div class="row">
+            <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       
+       
+       <?php  if($this->estado == '5'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error :No se encuentra registrada su asistencia.
+                 <div class="row">
+            <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+            </div>
+            <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+            </div>
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       
+   </div>
+                    
+
+</form>    
+                
+       <input type="hidden" name="nro_local" id="nro_local_id" value="<?php echo ($this->director) ? $this->director->nro_local : ''; ?>"/>
+       <input type="hidden" id="ins_numdoc_id" name="ins_numdoc" value="<?php echo ($this->director) ? $this->director->codCartilla : ''; ?>"/>
+       <input type="hidden" id="estado_id" name="estado" value="<?php echo ($this->estado) ? $this->estado : ''; ?>"/>         
+          
+                               
+            </div>
+        </div>
+
+</div>

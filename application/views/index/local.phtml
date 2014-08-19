@@ -1,0 +1,178 @@
+<?php
+$this->form->ins_numdoc->class = 'form-control text-left input-buscador';
+$this->form->ins_numdoc->placeholder = 'Pasar Lector de Código de Barra';
+$this->form->ins_numdoc->placeholder = 'Pasar Lector de Código de Barra';
+?>
+<div class="container">
+
+    <div class="panel panel-ecustom ui-shadow">
+        <div class="panel-heading etitleprin"><?php echo 'SEDE: '.($this->_request->session('sede')).' / LOCAL: '.$this->_request->session('nlocal'); ?></div>
+        <div class="panel-body etitle">
+            <input type="hidden" name="vjson" id ="vjson" value='<?php echo $this->form->getJsonValidate(TRUE); ?>'>
+          
+            
+             
+<form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/index/local" method="GET" id="frmdirector_id" name="frmdirector">
+            <div class="row">
+                <div class="col-xs-12 espace-top espace-bottom buscador">
+                   
+                    <div class="input-group">
+                        <?php echo form_input($this->form->ins_numdoc); ?>
+                        
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary  input-buscador " type="submit">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+<div  style="<?php echo ($this->director) ? '' : 'display:none'; ?>">
+   
+ <?php 
+
+ if($this->estado == '1') : ?>
+    <div class="row esubcontentpanel  alert-success">
+      
+        <div class="row">
+             <div class="col-xs-2"> 
+                 <div class="form-group  espacerightleft espace-top">
+                     <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                     <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                 </div>
+             </div>
+
+
+             <div class="col-xs-8">
+             <div class="form-group  espacerightleft espace-top">
+                 <div class="espacetitlebottom etitletit"><b>NOMBRES Y APELLIDOS</b></div>
+                 <label id="name_id"><?php echo ($this->director) ? $this->director->nombres . ' ,' . $this->director->apepat . ' ' . $this->director->apemat : ''; ?></label>
+             </div>
+             
+             </div>
+            
+            <div class="col-xs-2">
+                    <!-- <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>AULA</b></div>
+                        <label id="aula_id"><?php #echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div> -->
+                </div>
+         </div>
+        <div class="row">
+            <div class="col-xs-10">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>LOCAL DE APLICACION</b></div>
+                        <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+                    </div>
+                </div>
+        </div> 
+        
+    </div>  
+    <?php 
+     endif;
+    if($this->estado == '4') :
+    ?>
+    <!--- Mas de una entrada ---->
+    
+    <div class="row esubcontentpanel alert-danger" style="<?php echo ($this->director) ? '' : 'display:none'; ?>">
+       <div class="col-xs-12"> Error: DNI duplicado.</div>
+        <div class="row">
+             <div class="col-xs-4"> 
+                 <div class="form-group  espacerightleft espace-top">
+                     <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                     <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                 </div>
+             </div>
+
+
+             <div class="col-xs-6">
+             <div class="form-group  espacerightleft espace-top">
+                 <div class="espacetitlebottom etitletit"><b>NOMBRES Y APELLIDOS</b></div>
+                 <label id="name_id"><?php echo ($this->director) ? $this->director->nombres . ' ,' . $this->director->apepat . ' ' . $this->director->apemat : ''; ?></label>
+             </div>
+             </div>
+                <div class="col-xs-2">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>AULA</b></div>
+                        <label id="aula_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>   
+            
+         </div>
+         <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>LOCAL DE APLICACION</b></div>
+                        <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+                    </div>
+                </div>
+            
+                <div class="col-xs-4">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>FECHA DE REGISTRO</b></div>
+                        <label id="local_id"><?php echo ($this->director) ? $this->director->fecha_registro : ''; ?></label>
+                    </div>
+                </div>
+                
+        
+    </div>  
+    
+    </div>
+    <?php endif;
+    if($this->estado == '3') :
+    ?>
+    
+    <div class="row esubcontentpanel  alert-warning">
+      
+        <div class="col-xs-12"> Error: su local de evaluaci&oacute;n es. </div>
+        <div clas="row">
+            <div class="col-xs-4"> 
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>SEDE</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->sede : ''; ?></label>
+                    </div>
+                </div>
+   
+                <div class="col-xs-6">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>LOCAL DE APLICACION</b></div>
+                        <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+                    </div>
+                </div>
+             
+
+                <div class="col-xs-2">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>AULA</b></div>
+                        <label id="aula_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>DIRECCION</b></div>
+                        <label id="aula_id"><?php echo ($this->director) ? $this->director->direccion : ''; ?></label>
+                    </div>
+                </div>
+        </div>
+    </div>  
+    
+    
+    <?php endif;?>
+</div>
+    <?php  if($this->estado == '2'): ?>
+            <div class="row esubcontentpanel alert-danger" 
+                <label id="searchdni_id" class="etitle">EL DOCENTE NO ESTA REGISTRADO EN EL PADRON DE POSTULANTES</label>
+            </div>
+    <?php endif;  ?>
+            
+
+</form>
+
+    
+        <input type="hidden" name="nro_local" id="nro_local_id" value="<?php echo ($this->director) ? $this->director->nro_local : ''; ?>"/>
+        <input type="hidden" id="ins_numdoc_id" name="ins_numdoc" value="<?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?>"/>
+        <input type="hidden" id="codigo_id" name="codigo_id" value="<?php echo ($this->director) ? $this->director->codigo : ''; ?>"/>
+        <input type="hidden" id="estado_id" name="estado" value="<?php echo ($this->estado) ? $this->estado : ''; ?>"/>
+    </div>
+
+</div>

@@ -1,0 +1,75 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">
+                <DIV class="btn-news"><?php echo $this->titulo; ?> </DIV>
+
+
+                <div  class="btn-news-right"> 
+                    <button type="button" class="emnbtnopt dropdown-toggle btn-new-position "
+                            data-toggle="dropdown">
+                        <a href="javascript:void(0);" onclick="_transfer('4');"><span class="glyphicon glyphicon-refresh"></span></a>
+                    </button>
+                </div>
+
+            </div>
+            <form role="form" action="<?php echo BASE_URL; ?>index.php/listar/cartilla" id="frm1">
+                <div class="row">
+                    <div class="form-group  espacerightleft">
+
+                        <div class="espacetitlebottom etitletit espace-top"><b>Aula</b></div>
+                        <select class="form-control" id="paulas_id" required name="paulas">
+                            <option value="">Seleccione</option>
+                            <?php foreach ($this->aulas as $aula): ?>
+                                <option value="<?php echo $aula->naula; ?>"
+                                <?php
+                                if (isset($_REQUEST['paulas'])):
+                                    if ($_REQUEST['paulas'] == $aula->naula) :
+                                        echo 'selected';
+                                    endif;
+                                endif;
+                                ?> > Aula <?php echo $aula->naula;
+                                    if ($aula->tipo == 0):echo ' (Contingencia)';
+                                    endif; ?></option>
+<?php endforeach; ?>
+
+                        </select>
+                    </div>        
+                    <a href='<?php echo BASE_URL . 'index.php/ficha/masivo/' ?>'>Enviar todos</a> 
+
+                </div>
+            </form>
+<?php if (isset($_REQUEST['paulas'])): ?>
+                <div class="row eborderper ">
+                    <div class="col-xs-10 col-md-12  table-responsive text-center ">
+
+                        <table  class="table table-bordered etableeli text-left table-hover">
+                            <thead><tr class="info">
+                                <td>DNI</td>
+                                <td>COD CUADERNILLO</td>
+                                <td>NOMBRES Y APELLIDOS</td>
+                                <td>AULA </td>
+                                <td>FECHA Y HORA</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+    <?php foreach ($this->directores as $director): ?>
+                                    <tr  <?php echo ($director->s_cartilla == '2') ? 'class="alert-success"' : 'class="alert-danger"'; ?>   >
+                                    <td><small><?php echo $director->ins_numdoc; ?></small></td>
+                                    <td><small><?php echo $director->codCartilla; ?></small></td>
+                                    <td><small><?php echo $director->nombres . ' ' . $director->apepat . ' ' . $director->apemat; ?></small></td>
+                                    <td><small><?php echo $director->aula; ?></small></td>
+                                    <td><small><?php echo $director->f_cartilla; ?></small></td>
+                                     
+                                    </tr>
+    <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+<?php endif; ?>
+        </div>
+    </div>
+</div>

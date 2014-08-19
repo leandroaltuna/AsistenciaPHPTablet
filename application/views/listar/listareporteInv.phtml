@@ -1,0 +1,44 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">
+                <DIV class="btn-news"><?php echo $this->titulo; ?> </DIV>
+            </div>
+           
+
+                <div class="row eborderper ">
+                    <div class="col-xs-10 col-md-12  table-responsive text-center ">
+
+                        <table  class="table table-bordered etableeli text-left table-hover">
+                            <thead>
+                                <tr class="info">
+                                <td>DESCRIPCION</td>
+
+                                <td>REG. FICHAS</td>
+                                <td>REG. CUADERNILLOS</td>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+ 
+    
+                                <?php foreach ($this->reporte as $reporte): ?>
+                                <tr>
+                                <td><small><?php echo ($reporte->new_aula === 'TOTAL') ? $reporte->new_aula : 'AULA '.$reporte->new_aula;?></small></td>
+
+                                <td><small><?php echo $reporte->ficha; ?></small></td>
+                                <td><small><?php echo $reporte->cartilla; ?></small></td>
+                                </tr>
+                                <?php endforeach; ?>
+        
+                            
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>

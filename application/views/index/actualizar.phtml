@@ -1,0 +1,22 @@
+<?php
+//echo $this->mensaje;
+
+//if(!@copy('http://webinei.inei.gob.pe/beca18/update/updateEDNOM.zip','update/update.zip'))        
+        if(!@copy('http://190.223.32.196/beca18/update/updateEDNOM.zip','update/update.zip'))
+            {
+                $mensaje= error_get_last();
+                echo "COPY ERROR: ".$errors['type'];
+                echo "<br />\n".$errors['message'];
+            } else {
+                $errors= error_get_last();
+ 
+                
+                  $zip = new ZipArchive;
+                  $zip->open('update/update.zip');
+                  $zip->extractTo("../evaluacion/");
+                  $zip->close();
+
+                echo "Actualización Satisfactoria!";
+             }
+ 
+?>

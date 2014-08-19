@@ -1,0 +1,48 @@
+<div id="container"><!--content del menu -->
+    <div class="container-fluid etitle"> <!-- contenido fluid del boostrat-->
+
+        <div class="panel panel-ecustom ui-shadow">
+            <div class="panel-heading etitleprin">
+                
+                <DIV class="btn-news"><?php echo $this->titulo; ?> </DIV>
+                <div  class="btn-news"> 
+                    <button type="button" class="emnbtnopt dropdown-toggle btn-new-position "
+                            data-toggle="dropdown">
+                        <a href="javascript:void(0);" onclick="_transfer('1');"><span class="glyphicon glyphicon-refresh"></span></a>
+                    </button>
+                </div>
+            </div>
+            
+            <form role="form" action="" id="frm1">
+                <div class="row eborderper">
+                    <div class="col-xs-10 col-md-12 espace-top table-responsive text-center">
+                        <table  class="table table-bordered etableeli text-left table-hover">
+                            <thead><tr class="info">
+                                    <td>DEPARTAMENTO</td>
+                                    <td>DNI</td>
+                                    <td>NOMBRES Y APELLIDOS</td>
+                                   <!-- <td>AULA</td> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($this->directores as $director): ?>
+                                    <tr  <?php echo ($director->estatus == '2') ? 'class="alert-success"' : 'class="alert-danger"'; ?>   >
+                                        <td><small><?php echo $director->sede; ?></small></td>
+                                        <td><small><?php echo $director->ins_numdoc; ?></small></td>
+                                        <td><small><?php echo $director->nombres . ' ' . $director->apepat . ' ' . $director->apemat; ?></small></td>
+                                       <!-- <td><small><?php #echo $director->aula; ?></small></td> -->
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <?php echo $this->paginator; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

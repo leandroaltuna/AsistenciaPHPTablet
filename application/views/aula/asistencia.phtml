@@ -1,0 +1,203 @@
+
+<div class="container">
+    <div class="panel panel-ecustom ui-shadow">
+        <div class="panel-heading etitleprin"><?php echo 'SEDE: '.($this->_request->session('sede')).' / LOCAL: '.$this->_request->session('nlocal'); ?></div>
+            <div class="panel-body etitle">
+                
+                <form class="form-signin" role="form" action="<?php echo BASE_URL; ?>index.php/aula" method="GET" id="frmauladirector" name="frmauladirector">
+                    <div class="row"> 
+                        <div class="form-group  espacerightleft">
+                       
+                        <span class="espacetitlebottom etitletit"><b>Aula</b></span>
+                            <select class="form-control" id="paulas_id" required name="paulas" >
+                                <option value="">Seleccione</option>
+                                  <?php foreach ($this->aulas as $aula): ?>
+                                <option value="<?php echo $aula->naula; ?>"
+                                    <?php if(isset($_REQUEST['paulas'])): 
+                                            if($_REQUEST['paulas'] == $aula->naula) : 
+                                                echo 'selected' ; 
+                                            endif; 
+                                          endif;?> > Aula <?php echo $aula->naula;  if($aula->tipo==0):echo ' (Contingencia)'; endif ; ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-xs-12 espace-top espace-bottom buscador">
+                   
+                    <div class="input-group">
+                       <input id="ins_numdoc" required class="form-control text-left input-buscador" type="number" placeholder="Pasar Lector de Código de Barra" data-length="" value="" name="ins_numdoc">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary  input-buscador " type="submit">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+   <div class="row esubcontentpanel " >
+       
+       <?php  if($this->estado == '1'): ?>
+        <div class="row esubcontentpanel alert-success" >
+              <div class="row">
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+
+         </div>
+        </div>
+       <?php endif; ?>
+       <?php if($this->estado == '6'):    ?>   
+    <div class="row esubcontentpanel   <?php if($this->director->nro_local === $this->_request->session('nro_local')): echo 'alert-success';else: echo 'alert-warning'; endif; ?>" style="<?php echo ($this->director) ? '' : 'display:none'; ?>">
+      
+        <div class="col-xs-12"> Error: su local de evaluaci&oacute;n es. </div>
+        <div clas="row">
+            <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>SEDE</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->sede : ''; ?></label>
+                    </div>
+                </div>
+   
+                <div class="col-xs-8">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>LOCAL DE APLICACION</b></div>
+                        <label id="local_id"><?php echo ($this->director) ? $this->director->local_aplicacion : ''; ?></label>
+                    </div>
+                </div>
+             
+
+                <div class="col-xs-2">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>AULA</b></div>
+                        <label id="aula_id"><?php echo ($this->director) ? $this->director->aula : ''; ?></label>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                    <div class="form-group  espacerightleft espace-top">
+                        <div class="espacetitlebottom etitletit"><b>DIRECCION</b></div>
+                        <label id="aula_id"><?php echo ($this->director) ? $this->director->direccion : ''; ?></label>
+                    </div>
+                </div>
+        </div>
+    </div>  
+    
+    
+    <?php endif; ?>
+       
+       
+       <?php  if($this->estado == '4'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error : POSTULANTE NO ENCONTRADO EN EL PADRON.
+              <div class="row">
+                 
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo $_REQUEST['ins_numdoc']?></label>
+                    </div>
+                </div>
+                
+
+         </div>
+        </div>
+       <?php endif; ?>
+       
+       <?php if($this->estado == '2'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error: su aula de evaluaci&oacute;n es. 
+            <div class="row">
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+                
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                   
+                        <div class="espacetitlebottom etitletit"><b>Aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->aula: ''; ?></label>
+                    </div>
+                </div>
+            </div>
+               
+        </div>
+       <?php endif; ?>
+       
+       
+       <?php if($this->estado == '3'): ?>
+        <div class="row esubcontentpanel alert-danger" >
+             Error: Postulante ya registro su asistencia .
+            <div class="row">
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>DNI</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?></label>
+                    </div>
+                </div>
+                <div class="col-xs-6"> 
+                    <div class="form-group  espacerightleft espace-top">
+                       
+                        <div class="espacetitlebottom etitletit"><b>Postulante</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->apepat.' '. $this->director->apemat .' '. $this->director->nombres : ''; ?></label>
+                    </div>
+                </div>
+                
+                <div class="col-xs-2"> 
+                    <div class="form-group  espacerightleft espace-top">
+                   
+                        <div class="espacetitlebottom etitletit"><b>Aula</b></div>
+                        <label id="dni_id"><?php echo ($this->director) ? $this->director->new_aula: ''; ?></label>
+                    </div>
+                </div>
+            </div>
+               
+        </div>
+       <?php endif; ?>
+       
+   </div>
+                    
+                    
+                    
+            
+
+            
+
+</form>    
+                
+                
+      <input type="hidden" name="nro_local" id="nro_local_id" value="<?php echo ($this->director) ? $this->director->nro_local : ''; ?>"/>
+        <input type="hidden" id="ins_numdoc_id" name="ins_numdoc" value="<?php echo ($this->director) ? $this->director->ins_numdoc : ''; ?>"/>
+        <input type="hidden" id="estado_id" name="estado" value="<?php echo ($this->estado) ? $this->estado : ''; ?>"/>         
+            <input type="hidden" id="codigo_id" name="codigo_id" value="<?php echo ($this->director) ? $this->director->codigo : ''; ?>"/>      
+                                    
+                                
+            </div>
+        </div>
+
+</div>
